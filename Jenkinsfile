@@ -1,16 +1,18 @@
 pipeline {
     agent {
         node { label 'slave 3' }
+	    
     } 
+	        environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+  }
     stages {
         stage('Git clone') { 
             steps {
                 git 'https://github.com/sanju6655/demo-java.git'
             }
         }
-        environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-  }
+
   stages {
     stage('Build') {
       steps {
